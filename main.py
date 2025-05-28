@@ -58,3 +58,5 @@ def main():
         print("\n[Thinking]:", thinking)
         print("\n[Response]:", response)
 
+if __name__ == "__main__":
+    main()
