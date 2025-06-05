@@ -1,4 +1,4 @@
-Here’s a more structured format for the README:
+Here's an updated version of your README with proper credit:
 
 ---
 
@@ -46,6 +46,9 @@ The **AI Nutrition Tracker** is a Django-based web application that allows users
 * Transformers (for object detection)
 * USDA API (for nutritional data)
 
----
+## Credits
 
-This format breaks down the information into clear sections, making it easier for someone else to understand and set up the project. Let me know if you need any adjustments!
+This project uses the pre-trained **DETR (DEtection TRansformers) model** from Facebook for object detection.
+Model available at: [facebook/detr-resnet-50](https://huggingface.co/facebook/detr-resnet-50)
+
+---
