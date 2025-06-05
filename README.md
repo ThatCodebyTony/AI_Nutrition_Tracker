@@ -1,4 +1,3 @@
-Here's an updated version of your README with proper credit:
 
 ---
 
