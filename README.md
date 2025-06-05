@@ -1,1 +1,1 @@
-# huggingface
+# This program allows users to upload food images via a Django-based web application, which then uses a pre-trained object detection model (with 41.6M parameters) to identify food items in the image. The application then fetches nutritional information for the detected food items from the USDA API and displays it on the website.
