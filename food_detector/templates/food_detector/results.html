@@ -1,24 +1,53 @@
-<!-- food_detector/templates/food_detector/results.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Food Detection Results</title>
+    <title>Nutrition Results</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .results-container {
+            max-width: 800px;
+            margin: 50px auto;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        .result-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin: 20px auto;
+        }
+        .nutrition-list {
+            text-align: left;
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Detected Food Items</h1>
-    <img src="{{ uploaded_file_url }}" alt="Uploaded food image">
+    <div class="results-container">
+        <h1>Detected Food Items</h1>
+        <img class="result-image" src="{{ uploaded_file_url }}" alt="Uploaded food image">
 
-    {% for item in results %}
-        <h3>{{ item.label }} ({{ item.confidence|floatformat:2 }})</h3>
-        {% if item.nutrition %}
-            <h4>{{ item.nutrition.name }}</h4>
-            <ul>
-            {% for nutrient in item.nutrition.nutrients %}
-                <li>{{ nutrient.nutrientName }}: {{ nutrient.value }} {{ nutrient.unitName }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endfor %}
+        {% for item in results %}
+            <h3>{{ item.label }} ({{ item.confidence|floatformat:2 }})</h3>
+            {% if item.nutrition %}
+                <div class="nutrition-list">
+                    <h4>{{ item.nutrition.name }}</h4>
+                    <ul>
+                    {% for nutrient in item.nutrition.nutrients %}
+                        <li>{{ nutrient.nutrientName }}: {{ nutrient.value }} {{ nutrient.unitName }}</li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 </body>
 </html>

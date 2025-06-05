@@ -5,7 +5,6 @@ from transformers import DetrImageProcessor, DetrForObjectDetection
 from PIL import Image
 import torch
 
-
 load_dotenv()
 api_key = os.getenv('USDA_API_KEY')
 
@@ -24,11 +23,18 @@ def detect_food(image_path):
     detected_items = []
     for score, label, box in zip(results["scores"], results["labels"], results["boxes"]):
         food_label = model.config.id2label[label.item()]
+        
+        # Skip processing if 'table' is in the label
+        if "table" in food_label.lower():
+            continue  # Skip this item
+        
         confidence = score.item()
+        nutrition = get_nutritional_info(food_label, api_key) if food_label.lower() != "table" else None
+        
         detected_items.append({
             'label': food_label,
             'confidence': confidence,
-            'nutrition': get_nutritional_info(food_label, api_key)
+            'nutrition': nutrition
         })
     
     return detected_items
@@ -73,6 +79,11 @@ results = processor.post_process_object_detection(outputs, target_sizes=target_s
 # Process each detected item and fetch nutritional information
 for score, label, box in zip(results["scores"], results["labels"], results["boxes"]):
     food_label = model.config.id2label[label.item()]
+    
+    # Skip any label containing the word 'table'
+    if "table" in food_label.lower():
+        continue  # Skip printing and processing for "table" or "Table"
+    
     print(f"Detected label: {food_label} with score: {score.item()}")
     
     # Fetch nutritional info using the USDA API
