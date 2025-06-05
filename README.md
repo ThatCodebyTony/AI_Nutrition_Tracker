@@ -10,7 +10,7 @@ The **AI Nutrition Tracker** is a Django-based web application that allows users
 ## Features
 
 * **Image Upload**: Users can upload images of food items.
-* **Food Detection**: The application uses a state-of-the-art object detection model to identify food in the image.
+* **Food Detection**: The application uses a object detection model to identify food in the image.
 * **Nutritional Information**: The app fetches and displays nutritional information for the detected food items from the USDA API.
 
 ## Installation
