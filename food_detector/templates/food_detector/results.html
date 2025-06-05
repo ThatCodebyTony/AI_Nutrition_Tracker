@@ -1,0 +1,24 @@
+<!-- food_detector/templates/food_detector/results.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Detection Results</title>
+</head>
+<body>
+    <h1>Detected Food Items</h1>
+    <img src="{{ uploaded_file_url }}" alt="Uploaded food image">
+
+    {% for item in results %}
+        <h3>{{ item.label }} ({{ item.confidence|floatformat:2 }})</h3>
+        {% if item.nutrition %}
+            <h4>{{ item.nutrition.name }}</h4>
+            <ul>
+            {% for nutrient in item.nutrition.nutrients %}
+                <li>{{ nutrient.nutrientName }}: {{ nutrient.value }} {{ nutrient.unitName }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endfor %}
+</body>
+</html>
