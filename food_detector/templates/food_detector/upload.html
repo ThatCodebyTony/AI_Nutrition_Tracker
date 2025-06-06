@@ -12,24 +12,50 @@
     <div class="main-panel">
         <div class="container">
             <h1>AI Nutrition Tracker</h1>
-            <p>Upload a food image to get nutritional information</p>
             
-            <form method="post" enctype="multipart/form-data" id="upload-form">
-                {% csrf_token %}
-                <div class="upload-area" id="drop-area">
-                    <div class="upload-content">
-                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                        <p class="upload-text">Drag and drop an image here or click to select</p>
-                        <input type="file" name="image" id="file-input" accept="image/*">
-                    </div>
-                    <div class="preview" id="preview">
-                        <img id="preview-image" src="#" alt="Preview">
-                    </div>
-                </div>
-                <button type="submit" class="button" id="submit-btn" style="display: none;">
-                    Analyze Food <i class="fas fa-arrow-right"></i>
+            <!-- Mode Toggle -->
+            <div class="mode-toggle">
+                <button id="chat-mode" class="mode-button active">
+                    <i class="fas fa-comments"></i> Chat Mode
                 </button>
-            </form>
+                <button id="upload-mode" class="mode-button">
+                    <i class="fas fa-upload"></i> Image Upload
+                </button>
+            </div>
+
+            <!-- Chat Interface (Shown by default) -->
+            <div id="chat-interface" class="interface-section">
+                <div class="chat-container" id="chat-container">
+                    <!-- Messages will appear here -->
+                </div>
+                <form id="chat-form" class="chat-form">
+                    {% csrf_token %}
+                    <input type="text" id="user-input" placeholder="Ask about nutrition..." required>
+                    <button type="submit" class="button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Upload Interface (Hidden by default) -->
+            <div id="upload-interface" class="interface-section" style="display: none;">
+                <form method="post" enctype="multipart/form-data" id="upload-form">
+                    {% csrf_token %}
+                    <div class="upload-area" id="drop-area">
+                        <div class="upload-content">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <p class="upload-text">Drag and drop an image here or click to select</p>
+                            <input type="file" name="image" id="file-input" accept="image/*">
+                        </div>
+                        <div class="preview" id="preview">
+                            <img id="preview-image" src="#" alt="Preview">
+                        </div>
+                    </div>
+                    <button type="submit" class="button" id="submit-btn" style="display: none;">
+                        Analyze Food <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -38,5 +64,6 @@
     </button>
 
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="{% static 'js/chat.js' %}"></script>
 </body>
 </html>
