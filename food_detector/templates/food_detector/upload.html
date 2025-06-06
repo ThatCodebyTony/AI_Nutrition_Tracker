@@ -9,26 +9,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>AI Nutrition Tracker</h1>
-        <p>Upload a food image to get nutritional information</p>
-        
-        <form method="post" enctype="multipart/form-data" id="upload-form">
-            {% csrf_token %}
-            <div class="upload-area" id="drop-area">
-                <div class="upload-content">
-                    <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                    <p class="upload-text">Drag and drop an image here or click to select</p>
-                    <input type="file" name="image" id="file-input" accept="image/*">
+    <div class="main-panel">
+        <div class="container">
+            <h1>AI Nutrition Tracker</h1>
+            <p>Upload a food image to get nutritional information</p>
+            
+            <form method="post" enctype="multipart/form-data" id="upload-form">
+                {% csrf_token %}
+                <div class="upload-area" id="drop-area">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                        <p class="upload-text">Drag and drop an image here or click to select</p>
+                        <input type="file" name="image" id="file-input" accept="image/*">
+                    </div>
+                    <div class="preview" id="preview">
+                        <img id="preview-image" src="#" alt="Preview">
+                    </div>
                 </div>
-                <div class="preview" id="preview">
-                    <img id="preview-image" src="#" alt="Preview">
-                </div>
-            </div>
-            <button type="submit" class="button" id="submit-btn" style="display: none;">
-                Analyze Food <i class="fas fa-arrow-right"></i>
-            </button>
-        </form>
+                <button type="submit" class="button" id="submit-btn" style="display: none;">
+                    Analyze Food <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
     </div>
 
     <button class="back-to-top" id="backToTop">
