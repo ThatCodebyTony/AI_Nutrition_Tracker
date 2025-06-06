@@ -42,12 +42,17 @@ The **AI Nutrition Tracker** is a Django-based web application that allows users
 ## Technologies Used
 
 * Django (Python framework)
-* Transformers (for object detection)
+* Facebook's DETR-ResNet50 (for object detection)
+* Qwen3-0.6B language model (for natural language processing)
 * USDA API (for nutritional data)
+
 
 ## Credits
 
-This project uses the pre-trained **DETR (DEtection TRansformers) model** from Facebook for object detection.
-Model available at: [facebook/detr-resnet-50](https://huggingface.co/facebook/detr-resnet-50)
+This project uses the pre-trained DETR (DEtection TRansformers) model from Facebook for object detection.
+Model available at: facebook/detr-resnet-50
+
+This project also utilizes the Qwen3-0.6B language model for natural language processing.
+Model available at: Qwen3-0.6B
 
 ---
