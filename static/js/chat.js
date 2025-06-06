@@ -1,4 +1,8 @@
+console.log("chat.js loaded");
+
 document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM fully loaded");
+    
     // Mode switching
     const chatMode = document.getElementById('chat-mode');
     const uploadMode = document.getElementById('upload-mode');
@@ -8,65 +12,110 @@ document.addEventListener('DOMContentLoaded', function() {
     const userInput = document.getElementById('user-input');
     const chatContainer = document.getElementById('chat-container');
 
-    // Mode switching functionality
-    chatMode.addEventListener('click', () => {
-        chatMode.classList.add('active');
-        uploadMode.classList.remove('active');
-        chatInterface.style.display = 'block';
-        uploadInterface.style.display = 'none';
+    console.log("Elements found:", {
+        chatMode: !!chatMode,
+        uploadMode: !!uploadMode,
+        chatInterface: !!chatInterface,
+        uploadInterface: !!uploadInterface,
+        chatForm: !!chatForm,
+        userInput: !!userInput,
+        chatContainer: !!chatContainer
     });
 
-    uploadMode.addEventListener('click', () => {
-        uploadMode.classList.add('active');
-        chatMode.classList.remove('active');
-        uploadInterface.style.display = 'block';
-        chatInterface.style.display = 'none';
-    });
+    // Mode switching functionality
+    if (chatMode && uploadMode) {
+        chatMode.addEventListener('click', () => {
+            console.log("Chat mode clicked");
+            chatMode.classList.add('active');
+            uploadMode.classList.remove('active');
+            if (chatInterface) chatInterface.style.display = 'block';
+            if (uploadInterface) uploadInterface.style.display = 'none';
+        });
+
+        uploadMode.addEventListener('click', () => {
+            console.log("Upload mode clicked");
+            uploadMode.classList.add('active');
+            chatMode.classList.remove('active');
+            if (uploadInterface) uploadInterface.style.display = 'block';
+            if (chatInterface) chatInterface.style.display = 'none';
+        });
+    }
+
+    // Create a default welcome message
+    if (chatContainer) {
+        // Add welcome message
+        const welcomeDiv = document.createElement('div');
+        welcomeDiv.classList.add('chat-message', 'bot-message');
+        welcomeDiv.textContent = "Hello! I'm your nutrition assistant. How can I help you today?";
+        chatContainer.appendChild(welcomeDiv);
+    }
 
     // Handle chat form submission
-    chatForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const message = userInput.value;
-        if (!message.trim()) return;
+    if (chatForm) {
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            console.log("Chat form submitted");
 
-        // Add user message
-        addMessage(message, 'user');
-        userInput.value = '';
+            const message = userInput.value;
+            if (!message.trim()) return;
 
-        // Show loading state
-        addMessage('...', 'bot loading');
+            // Add user message
+            addMessage(message, 'user');
+            userInput.value = '';
 
-        // Get bot response
-        fetch('/chat/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-            },
-            body: `message=${encodeURIComponent(message)}`
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Remove loading message
-            chatContainer.removeChild(chatContainer.lastChild);
-            // Add bot response
-            addMessage(data.response, 'bot');
+            // Show loading state
+            const loadingDiv = document.createElement('div');
+            loadingDiv.classList.add('chat-message', 'bot-message', 'loading');
+            chatContainer.appendChild(loadingDiv);
             chatContainer.scrollTop = chatContainer.scrollHeight;
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            // Remove loading message
-            chatContainer.removeChild(chatContainer.lastChild);
-            addMessage('Sorry, I encountered an error.', 'bot');
+
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            console.log("CSRF Token:", csrfToken);
+
+            // Get bot response
+            fetch('/chat/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': csrfToken
+                },
+                body: `message=${encodeURIComponent(message)}`
+            })
+            .then(response => {
+                console.log("Response status:", response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log("Response data:", data);
+                
+                // Remove loading message
+                chatContainer.removeChild(loadingDiv);
+                
+                // Add bot response
+                addMessage(data.response, 'bot');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // Remove loading message
+                chatContainer.removeChild(loadingDiv);
+                addMessage('Sorry, I encountered an error.', 'bot');
+            });
         });
-    });
+    } else {
+        console.error("Chat form element not found!");
+    }
 
     function addMessage(text, sender) {
+        if (!chatContainer) return;
+        
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('chat-message', `${sender}-message`);
-        messageDiv.textContent = text;
+        
+
+        messageDiv.innerHTML = text; 
+        
         chatContainer.appendChild(messageDiv);
         chatContainer.scrollTop = chatContainer.scrollHeight;
+        console.log(`Added ${sender} message:`, text);
     }
 });
