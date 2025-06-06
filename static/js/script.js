@@ -39,11 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Handle dropped files
     dropArea.addEventListener('drop', handleDrop);
 
-    function handleDrop(e) {
-        const dt = e.dataTransfer;
-        const files = dt.files;
-        handleFiles(files);
-    }
 
     // Handle selected files
     fileInput.addEventListener('change', function() {
@@ -129,14 +124,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Scroll to results
         resultsSection.scrollIntoView({ behavior: 'smooth' });
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Error analyzing image');
-        submitBtn.innerHTML = 'Analyze Food <i class="fas fa-arrow-right"></i>';
-        submitBtn.disabled = false;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error analyzing image');
+            submitBtn.innerHTML = 'Analyze Food <i class="fas fa-arrow-right"></i>';
+            submitBtn.disabled = false;
+        });
     });
-});
 
     // Back to top functionality
     const backToTop = document.getElementById('backToTop');
@@ -162,6 +157,39 @@ document.addEventListener('DOMContentLoaded', function() {
             behavior: 'smooth'
         });
     });
+
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        
+        // Handle URLs (dragged images from the internet)
+        if (dt.types.includes('text/uri-list')) {
+            e.preventDefault();
+            const url = dt.getData('URL');
+            
+            // Show loading state
+            dropArea.classList.add('loading');
+            
+            // Fetch the image from URL
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    // Create a File object from the blob
+                    const file = new File([blob], 'dragged-image.jpg', { type: blob.type });
+                    handleFiles([file]);
+                    dropArea.classList.remove('loading');
+                })
+                .catch(error => {
+                    console.error('Error fetching image:', error);
+                    alert('Could not load image from URL. Please try downloading it first.');
+                    dropArea.classList.remove('loading');
+                });
+        }
+        // Handle files (dragged from computer)
+        else if (dt.files && dt.files.length > 0) {
+            handleFiles(dt.files);
+        }
+    }
     
 
 });
