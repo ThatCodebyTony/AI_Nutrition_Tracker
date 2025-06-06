@@ -1,5 +1,3 @@
-Collecting workspace information# AI Nutrition Tracker
-
 ## Overview
 
 AI Nutrition Tracker is a modern web application that helps users understand the nutritional content of their food through two powerful interfaces: **image recognition** and **natural language AI chat**. Simply upload a photo of your meal or ask nutrition-related questions to get instant insights.
