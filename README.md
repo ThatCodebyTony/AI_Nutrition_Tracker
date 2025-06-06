@@ -41,7 +41,7 @@ AI Nutrition Tracker is a modern web application that helps users understand the
 
 2. Create a virtual environment:
    ```bash
-   python -m venv venv
+   python3 -m venv venv
    source venv/bin/activate  # For Unix/MacOS
    # OR
    venv\Scripts\activate  # For Windows
@@ -60,7 +60,7 @@ AI Nutrition Tracker is a modern web application that helps users understand the
 
 5. Run the development server:
    ```bash
-   python manage.py runserver
+   python3 manage.py runserver
    ```
 
 6. Visit `http://127.0.0.1:8000/` in your browser to use the application.
