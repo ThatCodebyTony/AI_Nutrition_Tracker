@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add welcome message
         const welcomeDiv = document.createElement('div');
         welcomeDiv.classList.add('chat-message', 'bot-message');
-        welcomeDiv.textContent = "Hello! I'm your nutrition assistant. How can I help you today?";
+        welcomeDiv.textContent = "Hello! I'm your AI nutrition assistant. How can I help you today?";
         chatContainer.appendChild(welcomeDiv);
     }
 

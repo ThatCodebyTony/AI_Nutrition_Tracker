@@ -83,7 +83,7 @@ def chat(request):
             # Generate a short answer
             generated_ids = model.generate(
                 **model_inputs,
-                max_new_tokens=150,
+                max_new_tokens=250,
                 do_sample=True,
                 temperature=0.5,
                 repetition_penalty=1.5,
