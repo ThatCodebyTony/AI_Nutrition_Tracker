@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Nutrition Tracker</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .feature {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .feature i {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        .cta {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .screenshot {
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            margin: 30px 0;
+        }
+        .demo-button {
+            background-color: #fe7e1c;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .demo-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(254, 126, 28, 0.3);
+        }
+        .github-link {
+            color: #333;
+            margin-top: 40px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-panel" style="max-width: 900px;">
+        <div class="hero">
+            <h1>AI Nutrition Tracker</h1>
+            <p>Analyze food images and get nutritional information using AI</p>
+            
+            <img src="static/images/background.png" alt="AI Nutrition Tracker Demo" class="screenshot">
+            
+            <div class="cta">
+                <a href="https://github.com/yourusername/ai-nutrition-tracker" class="demo-button">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+            </div>
+        </div>
+        
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-camera" style="color: #fe7e1c;"></i>
+                <h3>Image Recognition</h3>
+                <p>Upload food images and get automatic identification using DETR-ResNet50 object detection model.</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-robot" style="color: #fe7e1c;"></i>
+                <h3>AI Chat Assistant</h3>
+                <p>Ask nutrition-related questions and get expert answers from our Qwen3-0.6B language model.</p>
+            </div>
+            
+            <div class="feature">
+                <i class="fas fa-database" style="color: #fe7e1c;"></i>
+                <h3>Nutritional Data</h3>
+                <p>Access comprehensive nutritional information from the USDA FoodData Central API.</p>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <h2>How It Works</h2>
+            <p>This Django-based web application combines computer vision and natural language processing to provide nutritional insights:</p>
+            <ol style="text-align: left; max-width: 600px; margin: 0 auto;">
+                <li>Upload a food image or ask a nutrition question</li>
+                <li>Our AI models analyze your input in real-time</li>
+                <li>Get detailed nutritional information or expert answers</li>
+            </ol>
+            
+            <a href="https://github.com/yourusername/ai-nutrition-tracker" class="github-link">
+                <i class="fab fa-github"></i> View full source code and setup instructions on GitHub
+            </a>
+        </div>
+    </div>
+</body>
+</html>
