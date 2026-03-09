@@ -6,17 +6,17 @@ AI Nutrition Tracker is a modern web application that helps users understand the
 
 ## Key Features
 
-### 🖼️ Food Detection & Analysis
+### Food Detection & Analysis
 - Upload food images via drag-and-drop or file selection
 - Automatic food identification using Facebook's DETR-ResNet50 object detection model
 - Real-time nutritional information retrieval from USDA FoodData Central API
 
-### 💬 AI Nutrition Assistant
+### AI Nutrition Assistant
 - Chat interface with an AI nutrition expert powered by Qwen3-0.6B language model
 - Get answers about calories, nutrients, dietary recommendations, and more
 - Intelligent response formatting with highlighted information
 
-### 📱 User Experience
+### User Experience
 - Seamless interface switching between chat and image upload modes
 - Responsive design that works across devices
 - Clean, intuitive UI with smooth animations and visual feedback
